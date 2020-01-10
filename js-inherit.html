@@ -1,0 +1,112 @@
+<html>
+	<head>
+		<script>
+			let key = 5;
+			
+			if (key == 1) {
+				function F() {
+					this.name = 'aaa';
+				}
+				F.prototype.gender = 'male';
+				
+				function S() {
+					this.age = 18;
+				}
+				
+				let f = new F();
+				console.log(f);
+				
+				let s = new S();
+				console.log(s);
+			} else if (key == 2) {
+				function F() {
+					this.name = 'aaa';
+				}
+				
+				function S() {
+					this.age = 18;
+				}
+				S.prototype = new F();
+				
+				let s = new S();
+				console.log(s);
+			} else if (key == 3) { 
+				function F() {
+					this.name = 'aaa';
+				}
+				
+				function F2() {
+					this.gender = 'male';
+				}
+				
+				function S() {
+					F.call(this);
+					F2.call(this);
+					this.age = 18;
+				}
+				
+				let s = new S();
+				console.log(s);
+			} else if (key == 4) {
+				function F() {
+					this.name = 'aaa';
+				}
+				
+				function F2() {
+					this.gender = 'male';
+				}
+				
+				function S() {
+					F.call(this);
+					F2.call(this);
+					this.age = 18;
+				}
+				S.prototype = new F();
+				
+				let s = new S();
+				console.log(s);
+			} else if (key == 5) {
+				function F() {
+					this.name = 'aaa';
+				}
+				F.prototype.gender = 'male';
+				
+				function createProto(proto) {
+					function Proto(){}
+					Proto.prototype = proto;
+					return new Proto();
+				}
+				
+				let proto = createProto(F.prototype);
+				
+				function S() {
+					F.call(this);
+					this.age = 18;
+				}
+				S.prototype = proto;
+				proto.constructor = S;
+				
+				let s = new S();
+				console.log(s);
+				console.log(s.gender);
+			} else {
+				function F() {
+					this.name = 'name';
+				}
+				F.prototype.gender = 'male';
+				
+				function inherit(f){
+					function S(){}
+					S.prototype = f;
+					return new S();
+				}
+				
+				let f = new F();
+				let s = inherit(f);
+				console.log(s);
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
